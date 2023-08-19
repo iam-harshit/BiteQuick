@@ -2,7 +2,6 @@ import RestaurantCard, { withLabelPromoted } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { RESTARURANTS_API } from "../utils/constants";
-import useNetworkStatus from "../utils/useNetworkStatus";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
@@ -10,7 +9,6 @@ const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filterRestaurantData, setFilterRestaurantData] = useState([]);
-  const netwrokStatus = useNetworkStatus();
   const RestaurantCardPromoted = withLabelPromoted();
 
   const fetchData = async () => {
@@ -36,10 +34,6 @@ const Body = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  if (netwrokStatus === false) {
-    return "Looks like you're offline. Please check your internet connection";
-  }
 
   return (
     <div className="body">

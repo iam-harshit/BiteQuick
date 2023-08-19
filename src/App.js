@@ -9,11 +9,13 @@ import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
+import useNetworkStatus from "./utils/useNetworkStatus";
 
-const Grocery = lazy(() => import("./components/Grocery"));
+const Grocery = lazy(() => import("./components/Grocery")); 
 
 const App = () => {
   const [userName, setUserName] = useState();
+  const netwrokStatus = useNetworkStatus();
 
   useEffect(() => {
     const data = {
@@ -21,6 +23,15 @@ const App = () => {
     };
     setUserName(data.name);
   }, []);
+
+  if (netwrokStatus === false) {
+    return(
+      <div className="flex flex-col my-auto items-center justify-center">
+        <h3>Whoops!</h3>
+        <h2>No Internet Connection</h2>
+      </div>
+    );
+  }
 
   return (
     <Provider store={appStore}>

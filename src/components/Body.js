@@ -1,31 +1,36 @@
 import RestaurantCard, { withLabelPromoted } from "./RestaurantCard";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { RESTARURANTS_API } from "../utils/constants";
 import useNetworkStatus from "../utils/useNetworkStatus";
-import UserContext from "../utils/UserContext";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
+  const [loading, setLoading] = useState(true);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filterRestaurantData, setFilterRestaurantData] = useState([]);
   const netwrokStatus = useNetworkStatus();
   const RestaurantCardPromoted = withLabelPromoted();
-  const { loggedInUser, setUserName } = useContext(UserContext);
 
   const fetchData = async () => {
-    const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-    );
-    const output = await response.json();
-    //Optional chaining
-    setListOfRestaurants(
-      output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-    setFilterRestaurantData(
-      output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+    setLoading(true);
+    try {
+      const response = await fetch(RESTARURANTS_API);
+      const output = await response.json();
+      //Optional chaining
+      setListOfRestaurants(
+        output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+      setFilterRestaurantData(
+        output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -78,20 +83,24 @@ const Body = () => {
         </div>
       </div>
       <div className="restaurant-container flex items-center justify-center flex-wrap mb-10">
-        {filterRestaurantData?.map((restaurant) => {
-          return (
-            <Link
-              key={restaurant?.info.id}
-              to={"/restaurants/" + restaurant?.info.id}
-            >
-              {restaurant?.info?.promoted ? (
-                <RestaurantCardPromoted restaurantData={restaurant?.info} />
-              ) : (
-                <RestaurantCard restaurantData={restaurant?.info} />
-              )}
-            </Link>
-          );
-        })}
+        {loading ? (
+          <Shimmer />
+        ) : (
+          filterRestaurantData?.map((restaurant) => {
+            return (
+              <Link
+                key={restaurant?.info.id}
+                to={"/restaurants/" + restaurant?.info.id}
+              >
+                {restaurant?.info?.promoted ? (
+                  <RestaurantCardPromoted restaurantData={restaurant?.info} />
+                ) : (
+                  <RestaurantCard restaurantData={restaurant?.info} />
+                )}
+              </Link>
+            );
+          })
+        )}
       </div>
     </div>
   );

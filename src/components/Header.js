@@ -1,14 +1,12 @@
 //In this way we can import named export component
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
-import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
 import { CiShoppingCart } from "react-icons/ci";
 
 const Header = () => {
   const [loginLogoutButton, setLoginLogoutButton] = useState("Login");
-  const { loggedInUser } = useContext(UserContext);
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
@@ -24,21 +22,7 @@ const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="px-3 py-2">
-            <Link to="/about">About Us</Link>
-          </li>
-          <li className="px-3 py-2">
-            <Link to="/contact">Contact Us</Link>
-          </li>
-          <li className="px-3 py-2">
-            <Link to="/grocery">Grocery</Link>
-          </li>
-          <li className="px-3 py-2">
-            <Link to="/cart">
-              <CiShoppingCart className="text-2xl" />
-            </Link>
-            <div className="bg-[#8DC73F] text-white text-lg font-bold rounded-full relative top-[-48px] right-[-2px] px-2">
-              {cartItems.length}
-            </div>
+            <Link to="/grocery">Grocery Mart</Link>
           </li>
           <li className="px-3 py-2">
             <button
@@ -51,6 +35,14 @@ const Header = () => {
             >
               {loginLogoutButton}
             </button>
+          </li>
+          <li className="px-3 py-2">
+            <Link to="/cart">
+              <CiShoppingCart className="text-2xl" />
+            </Link>
+            <div className="bg-[#8DC73F] text-white text-lg font-bold rounded-full relative top-[-48px] right-[-2px] px-2">
+              {cartItems.length}
+            </div>
           </li>
         </ul>
       </div>

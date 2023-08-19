@@ -8,7 +8,6 @@ const RestaurantCard = (props) => {
     name,
     cuisines,
     costForTwo,
-    deliveryTime,
     avgRating,
     cloudinaryImageId,
   } = restaurantData;

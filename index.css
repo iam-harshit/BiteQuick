@@ -3,15 +3,38 @@
 @tailwind utilities;
 
 @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+  0% {
+    transform: translateX(-100%);
   }
-  
-  .shimmer {
-    animation: shimmer 2s infinite linear;
+
+  100% {
+    transform: translateX(100%);
   }
-  
+}
+
+.shimmer {
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-effect {
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+  background: linear-gradient(90deg,
+      #f0f0f0,
+      #e0e0e0 40%,
+      #f0f0f0 60%);
+  background-size: 200% 100%;
+}

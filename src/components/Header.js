@@ -9,8 +9,6 @@ import { CiShoppingCart } from "react-icons/ci";
 const Header = () => {
   const [loginLogoutButton, setLoginLogoutButton] = useState("Login");
   const { loggedInUser } = useContext(UserContext);
-
-  //Here, we're subscribing to our store
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
@@ -54,7 +52,6 @@ const Header = () => {
               {loginLogoutButton}
             </button>
           </li>
-          <li className="px-3 py-2 font-bold">{loggedInUser}</li>
         </ul>
       </div>
     </div>

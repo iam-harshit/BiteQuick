@@ -12,11 +12,6 @@ import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
 
-//This below code for helps the optimising the react app
-//From this code we are load the grocery component when anyone click on the link or open the url.
-//Means on-demand or dynamic import.
-//We can also called lazy loading, dynamic import, code spiliting, chunking, dynamic bundling, on-demand loading
-
 const Grocery = lazy(() => import("./components/Grocery"));
 
 const App = () => {
@@ -29,18 +24,11 @@ const App = () => {
     setUserName(data.name);
   }, []);
 
-  //If we're wrap with our root component with Context_Name.Provider. So now the value of the context is display
-  //all over the project where it is use.
-
   return (
     <Provider store={appStore}>
-      {/* This value use for all over the project */}
       <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
         <div className="app">
-          {/* This value use for only header part */}
-          {/* <UserContext.Provider value={{loggedInUser: "Harshit Kumar Saxena"}}> */}
           <Header />
-          {/* </UserContext.Provider> */}
           <Outlet />
         </div>
       </UserContext.Provider>
@@ -74,7 +62,7 @@ const appRoute = createBrowserRouter([
         ),
       },
       {
-        path: "/restaurants/:resId", //This ':' makes our route dynamic
+        path: "/restaurants/:resId",
         element: <RestaurantMenu />,
       },
       {

@@ -12,8 +12,6 @@ const Body = () => {
   const RestaurantCardPromoted = withLabelPromoted();
   const { loggedInUser, setUserName } = useContext(UserContext);
 
-  //Note for state variable: Whenever state variable update, react triggers a reconciliation cycle (re-renders the component).
-
   const fetchData = async () => {
     const response = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
@@ -21,36 +19,22 @@ const Body = () => {
     const output = await response.json();
     //Optional chaining
     setListOfRestaurants(
-      // output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-      // ?.restaurants
       output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilterRestaurantData(
-      // output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-      //   ?.restaurants
       output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
 
-  //If no dependency array => useEffect is called on every render when our component is render.
-  //If dependency array is empty = [] => useEffect is called on inital render (means just once).
-  //If dependecy array have some dependency like listOfRestaurants => useEffect is called on everytime when listOfRestaurants is updated.
   useEffect(() => {
     fetchData();
   }, []);
 
-  //This is called conditional rendering
-  // if(listOfRestaurants.length === 0){
-  //   // return <Shimmer/>
-  // }
-
   if (netwrokStatus === false) {
     return "Looks like you're offline. Please check your internet connection";
   }
-
-  // console.log(listOfRestaurants);
 
   return (
     <div className="body">
@@ -78,17 +62,6 @@ const Body = () => {
           </button>
         </div>
         <br />
-
-        {/* <div className="search-btn">
-          <label>Username Input: </label>
-          <input
-            className="border border-black p-1"
-            type="text"
-            value={loggedInUser}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </div> */}
-
         <br />
         <div>
           <button
@@ -111,10 +84,6 @@ const Body = () => {
               key={restaurant?.info.id}
               to={"/restaurants/" + restaurant?.info.id}
             >
-              {/* If the restaurant is promoted then add a promoted label to it. 
-                TODO
-                Change swiggy api
-              */}
               {restaurant?.info?.promoted ? (
                 <RestaurantCardPromoted restaurantData={restaurant?.info} />
               ) : (

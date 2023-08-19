@@ -3,12 +3,11 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../utils/cartSlice";
 
 const ItemList = ({ items }) => {
-
   const dispatch = useDispatch();
 
   const addItemHandler = (item) => {
     dispatch(addItem(item));
-  }
+  };
 
   return (
     <div>
@@ -32,11 +31,18 @@ const ItemList = ({ items }) => {
             <p className="text-xs pb-2">{item?.card?.info?.description}</p>
           </div>
           <div className="w-3/12 p-4 relative">
-          <img src={CDN_URL + item?.card?.info?.imageId} className="w-full rounded-lg" />
+            <img
+              src={CDN_URL + item?.card?.info?.imageId}
+              className="w-full rounded-lg"
+            />
             <div>
-            <button className="p-2 px-3 bg-[#8DC73F] text-white rounded-lg absolute bottom-0 left-1/2 transform -translate-x-8 hover:bg-[#63c132] transition duration-300 ease-in-out" onClick={() => addItemHandler(item)}>Add +</button>
+              <button
+                className="p-2 px-3 bg-[#8DC73F] text-white rounded-lg absolute bottom-0 left-1/2 transform -translate-x-8 hover:bg-[#63c132] transition duration-300 ease-in-out"
+                onClick={() => addItemHandler(item)}
+              >
+                Add +
+              </button>
             </div>
-            
           </div>
         </div>
       ))}

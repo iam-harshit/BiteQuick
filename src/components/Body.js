@@ -14,7 +14,7 @@ const Body = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/.netlify/functions/swiggy-fetch");
+      const response = await fetch("../../netlify/function/fetchData.js");
       const output = await response.json();
       //Optional chaining
       setListOfRestaurants(

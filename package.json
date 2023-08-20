@@ -1,8 +1,7 @@
 {
-  "name": "namaste-react",
+  "name": "bitequick",
   "version": "1.0.0",
-  "description": "This is a namaste react app",
-  "main": "App.js",
+  "description": "Instant Culinary Delights at Your Fingertips.",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",

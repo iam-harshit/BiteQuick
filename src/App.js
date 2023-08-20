@@ -12,7 +12,7 @@ import Cart from "./components/Cart";
 import useNetworkStatus from "./utils/useNetworkStatus";
 import Footer from "./components/Footer";
 
-const Grocery = lazy(() => import("./components/Grocery")); 
+const Grocery = lazy(() => import("./components/Grocery"));
 
 const App = () => {
   const [userName, setUserName] = useState();
@@ -26,10 +26,12 @@ const App = () => {
   }, []);
 
   if (netwrokStatus === false) {
-    return(
-      <div className="flex flex-col my-auto items-center justify-center">
-        <h3>Whoops!</h3>
-        <h2>No Internet Connection</h2>
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <h3 className="font-bold text-4xl pb-3">Whoops!</h3>
+          <h2 className="text-2xl">No Internet Connection</h2>
+        </div>
       </div>
     );
   }
@@ -40,7 +42,7 @@ const App = () => {
         <div className="app">
           <Header />
           <Outlet />
-          <Footer/>
+          <Footer />
         </div>
       </UserContext.Provider>
     </Provider>
@@ -70,8 +72,8 @@ const appRoute = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart/>
-      }
+        element: <Cart />,
+      },
     ],
     errorElement: <Error />,
   },

@@ -2,9 +2,9 @@
 A highly scalable and optimized food ordering web app that brings the world of flavors right to your fingertips!
 
 ## Table of Contents 📜
-- Features 🌟
-- Installation 🔧
-- Usage 🍽
+- Features 
+- Installation 
+- Usage 
 
 ## Features 🌟
 - **Real-time Data** - Fetches restaurant details and menus using a live API.

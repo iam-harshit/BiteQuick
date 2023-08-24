@@ -12,9 +12,9 @@ const Cart = () => {
   };
 
   return (
-    <div className="flex flex-col w-6/12 m-auto text-center mt-10 pb-10">
-      <div className="flex items-center justify-between">
-        <h1 className="font-bold text-2xl">Cart</h1>
+    <div className="flex flex-col w-full md:w-8/12 lg:w-6/12 m-auto text-center mt-10 pb-10">
+      <div className="flex items-center justify-between mx-4">
+        <h1 className="font-bold text-xl md:text-2xl">Cart</h1>
         <button
           className="bg-[#8DC73F] hover:bg-[#63c132] text-white rounded-md px-4 py-2 transition duration-300 ease-in-out"
           onClick={clearCartHandler}
@@ -24,18 +24,22 @@ const Cart = () => {
       </div>
       {cartItems.length === 0 && (
         <div>
-          <img src={emptyCart} alt="" />
+          <img
+            src={emptyCart}
+            alt="Empty Cart"
+            className="w-full md:w-1/2 m-auto"
+          />
         </div>
       )}
       <div className="w-full pt-10">
         {cartItems.map((item) => (
           <div
             key={item?.card?.info?.id}
-            className="border-gray-200 border-b-2 text-left flex justify-between"
+            className="border-gray-200 border-b-2 text-left flex mx-4 md:flex-row justify-between"
           >
-            <div className="w-9/12">
+            <div className="w-full md:w-9/12 px-2 md:px-0">
               <div className="py-2">
-                <span>{item?.card?.info?.name}</span>
+                <span className="md:text-lg">{item?.card?.info?.name}</span>
                 <br />
                 <span className="text-sm">
                   {" "}
@@ -49,7 +53,7 @@ const Cart = () => {
             <div className="py-4">
               <img
                 src={CDN_URL + item?.card?.info?.imageId}
-                className="w-[100px] h-[100px] rounded-lg"
+                className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] mt-[-25px] rounded-lg m-auto"
               />
             </div>
           </div>

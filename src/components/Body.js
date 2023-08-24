@@ -16,7 +16,6 @@ const Body = () => {
     try {
       const response = await fetch(RESTARURANTS_API);
       const output = await response.json();
-      //Optional chaining
       setListOfRestaurants(
         output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
@@ -36,18 +35,18 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="body">
-      <div className="flex justify-between m-10">
-        <div className="flex items-center space-x-6 bg-white border p-2 rounded-md shadow-lg">
+    <div className="body px-4 md:px-8 lg:px-16 py-8">
+      <div className="flex flex-col md:flex-row justify-between mb-6">
+        <div className="flex items-center space-x-2 md:space-x-1 bg-white border p-2 rounded-md shadow-lg w-full md:w-[400px] lg:w-1/3">
           <input
-            className="flex-grow outline-none"
+            className="flex-grow outline-none px-2 py-1"
             type="text"
             placeholder="Search restaurants"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
           <button
-            className="bg-[#8DC73F] hover:bg-[#63c132] text-white rounded-md px-4 py-2 transition duration-300 ease-in-out"
+            className="bg-[#8DC73F] hover:bg-[#63c132] text-white rounded-md px-2 md:px-4 py-1 md:py-2 transition duration-300 ease-in-out"
             onClick={() => {
               const filteredRestaurants = listOfRestaurants.filter((res) => {
                 return res.info.name
@@ -60,11 +59,9 @@ const Body = () => {
             Search
           </button>
         </div>
-        <br />
-        <br />
-        <div>
+        <div className="mt-6 md:mt-0">
           <button
-            className="border p-2 rounded-md bg-[#8DC73F] text-white shadow-lg hover:bg-[#63c132] transition duration-300 ease-in-out"
+            className="border w-full md:w-auto p-2 rounded-md bg-[#8DC73F] text-white shadow-lg hover:bg-[#63c132] transition duration-300 ease-in-out"
             onClick={() => {
               const filteredRestaurants = listOfRestaurants.filter((res) => {
                 return res?.info?.avgRating > 4;
@@ -76,7 +73,7 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="restaurant-container flex items-center justify-center flex-wrap mb-10">
+      <div className="restaurant-container flex flex-wrap justify-center items-center mb-10">
         {loading ? (
           <Shimmer />
         ) : (

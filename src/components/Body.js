@@ -14,14 +14,14 @@ const Body = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(RESTARURANTS_API);
+      const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(RESTARURANTS_API));
       const output = await response.json();
       setListOfRestaurants(
-        output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        output?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
       setFilterRestaurantData(
-        output?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        output?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
     } catch (error) {

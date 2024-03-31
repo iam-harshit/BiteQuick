@@ -6,7 +6,7 @@ const useRestaurantMenu = (resId) => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MENU_API + resId));
+      const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(MENU_API + resId));
       const output = await response.json();
       setResInfo(output.data);
     } catch (error) {
